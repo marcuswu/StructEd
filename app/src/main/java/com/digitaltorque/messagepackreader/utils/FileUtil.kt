@@ -27,6 +27,17 @@ class FileUtil {
             }
         }
 
+        fun writeFile(context: Context, data: ByteArray, file: Uri): String? {
+            try {
+                context.contentResolver.openOutputStream(file)?.let {
+                    IOUtils.write(data, it)
+                }
+            } catch (e: Exception) {
+                return e.message
+            }
+            return null
+        }
+
         fun filePath(context: Context, file: Uri): String? {
             return when(true) {
                 isExternalStorageDocument(file) -> externalStorageDocumentPath(file)

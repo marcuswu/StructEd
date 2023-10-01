@@ -52,6 +52,16 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
+                    /*composable("editor?path={path}", arguments = listOf(navArgument("path") {
+                        defaultValue = arrayOf<String>()
+                        type = NavType.StringArrayType
+                    })) {
+                        msgPackFile.value?.let { uri ->
+                            Surface (modifier = Modifier.fillMaxSize()){
+                                MsgPackEditor(onDismissRequest = {})
+                            }
+                        }
+                    }*/
                 }
             }
         }
