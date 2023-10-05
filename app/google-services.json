@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "386302802695",
+    "project_id": "msgpack-36a23",
+    "storage_bucket": "msgpack-36a23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386302802695:android:63fea708ff76664ad363a2",
+        "android_client_info": {
+          "package_name": "com.digitaltorque.messagepackreader"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPGMsE4apbAFU1Cpu5nsm8YDivwlHu-us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

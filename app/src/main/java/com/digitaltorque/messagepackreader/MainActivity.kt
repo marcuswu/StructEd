@@ -7,11 +7,13 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.AnnotatedString
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -27,20 +29,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val msgPackFile = remember { mutableStateOf<Uri?>(null) }
-            val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) {
-                msgPackFile.value = it
-                App.router().navigate("viewer")
-            }
             val navController = rememberNavController()
             App.setRouter(Navigation(navController))
             MessagePackReaderTheme {
                 NavHost(navController = navController, startDestination = "splash") {
                     composable("splash") { Splash() }
                     composable("home") {
-                        ClickableText(
-                            onClick = { launcher.launch(arrayOf("*/*"))},
-                            text = AnnotatedString("Click here to open a file")
-                        )
+                        Surface(modifier = Modifier.fillMaxSize()) {
+                            Home(onFileSelected = { file ->
+                                msgPackFile.value = file
+                                App.router().navigate("viewer")
+                            }, modifier = Modifier
+                            )
+                        }
                     }
                     composable("viewer?path={path}", arguments = listOf(navArgument("path") {
                         defaultValue = arrayOf<String>()
@@ -52,16 +53,6 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
-                    /*composable("editor?path={path}", arguments = listOf(navArgument("path") {
-                        defaultValue = arrayOf<String>()
-                        type = NavType.StringArrayType
-                    })) {
-                        msgPackFile.value?.let { uri ->
-                            Surface (modifier = Modifier.fillMaxSize()){
-                                MsgPackEditor(onDismissRequest = {})
-                            }
-                        }
-                    }*/
                 }
             }
         }
