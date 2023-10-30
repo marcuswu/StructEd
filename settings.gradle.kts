@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MessagePack Reader"
+rootProject.name = "StructEd"
 include(":app")
