@@ -1,4 +1,4 @@
-package com.digitaltorque.structed
+package com.digitaltorque.structed.ui
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.digitaltorque.structed.R
 import com.example.compose.MessagePackReaderTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

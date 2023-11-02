@@ -1,4 +1,4 @@
-package com.digitaltorque.structed
+package com.digitaltorque.structed.ui
 
 import android.net.Uri
 import androidx.activity.compose.BackHandler
@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.App
+import com.digitaltorque.structed.config.AppConfig
 import com.digitaltorque.structed.utils.FileUtil
 import com.digitaltorque.structed.utils.PurchaseManager
 import com.digitaltorque.structed.utils.PurchaseManagerImpl

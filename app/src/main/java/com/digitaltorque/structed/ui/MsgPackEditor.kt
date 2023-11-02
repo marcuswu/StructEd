@@ -1,4 +1,4 @@
-package com.digitaltorque.structed
+package com.digitaltorque.structed.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

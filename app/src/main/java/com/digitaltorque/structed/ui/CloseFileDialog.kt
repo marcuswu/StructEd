@@ -1,4 +1,4 @@
-package com.digitaltorque.structed
+package com.digitaltorque.structed.ui
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult

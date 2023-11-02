@@ -23,6 +23,12 @@ android {
         }
     }
 
+    configurations.all {
+        exclude("com.google.android.gms", "play-services-ads")
+        exclude("com.google.android.gms", "play-services-ads-identifier")
+        exclude("com.google.android.gms", "play-services-ads-lite")
+    }
+
     buildTypes {
         debug {
             isJniDebuggable = true

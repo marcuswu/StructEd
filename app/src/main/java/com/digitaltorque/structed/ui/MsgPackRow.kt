@@ -1,4 +1,4 @@
-package com.digitaltorque.structed
+package com.digitaltorque.structed.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.App
+import com.digitaltorque.structed.R
 import com.digitaltorque.structed.utils.setValue
 import com.digitaltorque.structed.utils.valueOrType
 import com.digitaltorque.structed.viewmodel.BrowserViewModel

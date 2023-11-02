@@ -15,7 +15,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import app.App
+import com.digitaltorque.structed.config.AppConfig
 import com.digitaltorque.structed.navigation.Navigation
+import com.digitaltorque.structed.ui.Home
+import com.digitaltorque.structed.ui.MsgPackBrowser
+import com.digitaltorque.structed.ui.Splash
 import com.digitaltorque.structed.utils.PurchaseManagerImpl
 import com.digitaltorque.structed.viewmodel.BrowserViewModel
 import com.example.compose.MessagePackReaderTheme
@@ -23,7 +27,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
-import firebase.ActivateCallback
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
