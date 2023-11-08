@@ -47,6 +47,10 @@ fun MsgPackBrowser(path: Array<String>, purchaseManager: PurchaseManager, modifi
         LocalContext.current.errorMessage(it.message ?: "")
         viewModel.clearError()
     }
+    if (mapState.value?.data == null) {
+        App.router().navigate("home")
+        return
+    }
     val keys = viewModel.getField(path.joinToString(separator = "/"))?.keys() ?: listOf()
     println("browser keys: $keys")
     LazyColumn (modifier = modifier) {
