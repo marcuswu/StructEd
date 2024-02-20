@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.digitaltorque.structed"
-        minSdk = 25
+        minSdk = 26
 
         targetSdk = 34
         versionCode = 3
@@ -32,7 +32,6 @@ android {
     buildTypes {
         debug {
             isJniDebuggable = true
-            packaging.jniLibs.keepDebugSymbols += "**/libgojni.so"
         }
         release {
             isMinifyEnabled = false
@@ -54,6 +53,9 @@ android {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
     packaging {
+        jniLibs {
+            keepDebugSymbols += "**/libgojni.so"
+        }
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -66,36 +68,37 @@ dependencies {
     implementation(files("libs/msgpack.aar"))
 
     // Apache commons
-    implementation("commons-io:commons-io:2.6")
+    implementation("commons-io:commons-io:20030203.000550")
 
     // AndroidX support
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha06")
 
     // Jetpack Compose
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.navigation:navigation-compose:2.7.6")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.4.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-config-ktx")
 
     // Billing
-    implementation("com.android.billingclient:billing-ktx:6.0.1")
+    implementation("com.android.billingclient:billing-ktx:6.1.0")
+    implementation(files("app/libs"))
 
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

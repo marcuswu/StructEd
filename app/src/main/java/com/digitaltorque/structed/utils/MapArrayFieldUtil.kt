@@ -93,19 +93,28 @@ fun Field.setValue(value:String) {
     setValue(this.type().toInt(), value)
 }
 
-fun Field.typeHintText(): String{
-    return when (this.type().toInt()) {
+fun MsgPackType.typeHintText(): String {
+    return when (this.ordinal) {
         MsgPackType.String.ordinal -> "This is a text value. Any reasonable text should be ok"
-        MsgPackType.Int.ordinal -> "Integer value. Valid values are from " + Int.MIN_VALUE + " to " + Int.MAX_VALUE
+        MsgPackType.Int.ordinal -> "Integer value. Valid values are from " + String.format("%e", Int.MIN_VALUE.toFloat()) + " to " + String.format("%e", Int.MAX_VALUE.toFloat())
         MsgPackType.Int8.ordinal -> "8-bit integer value. Valid values are from " + Byte.MIN_VALUE + " to " + Byte.MAX_VALUE
         MsgPackType.Int16.ordinal -> "16-bit integer value. Valid values are from " + Short.MIN_VALUE + " to " + Short.MAX_VALUE
-        MsgPackType.Int32.ordinal -> "32-bit integer value. Valid values are from " + Int.MIN_VALUE + " to " + Int.MAX_VALUE
-        MsgPackType.Int64.ordinal -> "64-bit integer value. Valid values are from " + Long.MIN_VALUE + " to " + Long.MAX_VALUE
-        MsgPackType.Float32.ordinal -> "32-bit floating point number value. Valid values are from " + Float.MIN_VALUE + " to " + Float.MAX_VALUE
-        MsgPackType.Float64.ordinal -> "64-bit floating point number value. Valid values are from " + Double.MIN_VALUE + " to " + Double.MAX_VALUE
+        MsgPackType.Int32.ordinal -> "32-bit integer value. Valid values are from " + String.format("%e", Int.MIN_VALUE.toFloat()) + " to " + String.format("%e", Int.MAX_VALUE.toFloat())
+        MsgPackType.Int64.ordinal -> "64-bit integer value. Valid values are from " + String.format("%e", Long.MIN_VALUE.toFloat()) + " to " + String.format("%e", Long.MAX_VALUE.toFloat())
+        MsgPackType.Float32.ordinal -> "32-bit floating point number value. Valid values are from " + String.format("%5.2e", Float.MIN_VALUE) + " to " + String.format("%5.3e", Float.MAX_VALUE)
+        MsgPackType.Float64.ordinal -> "64-bit floating point number value. Valid values are from " + String.format("%5.2e", Double.MIN_VALUE) + " to " + String.format("%5.2e", Double.MAX_VALUE)
         MsgPackType.Bool.ordinal -> "Boolean value. Valid values are true or false"
         MsgPackType.Nil.ordinal -> "Null value (no value). Currently, no there is no support for changing null values."
-        MsgPackType.Time.ordinal -> "Time value. Formatted as: Year-Month-DayTHours:Minutes:Seconds.MillisecondsZ where Month, Day, Hours, Minutes, and Seconds must be two digits. Lead with a zero for single-digit values."
+        MsgPackType.Time.ordinal -> "Time value. Formatted as ISO-8601: Such as 2024-01-17T12:35:13.456Z."
         else -> "Unknown value. This value cannot be changed."
     }
+}
+
+fun MsgPackType.isScalarType(): Boolean {
+    val nonScalarTypes = arrayOf(MsgPackType.Nil, MsgPackType.Unknown, MsgPackType.Array, MsgPackType.Map)
+    return !nonScalarTypes.contains(this)
+}
+
+fun Field.typeHintText(): String {
+    return MsgPackType.values().getOrElse(this.type().toInt()) { MsgPackType.Unknown }.typeHintText()
 }

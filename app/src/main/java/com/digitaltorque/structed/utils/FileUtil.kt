@@ -2,7 +2,7 @@ package com.digitaltorque.structed.utils
 
 import android.content.Context
 import android.net.Uri
-import org.apache.commons.io.IOUtils
+import org.apache.commons.io.IOUtil
 
 
 class FileUtil {
@@ -19,7 +19,7 @@ class FileUtil {
             try {
                 return context.contentResolver.openInputStream(file)?.let {
                     return@let try {
-                        IOUtils.toByteArray(it)
+                        IOUtil.toByteArray(it)
                     } catch (e: Exception) {
                         null
                     }
@@ -32,7 +32,7 @@ class FileUtil {
         fun writeFile(context: Context, data: ByteArray, file: Uri): String? {
             try {
                 context.contentResolver.openOutputStream(file, "wt")?.let {
-                    IOUtils.write(data, it)
+                    IOUtil.copy(data, it)
                 }
             } catch (e: Exception) {
                 return e.message

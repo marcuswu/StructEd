@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.App
 import com.digitaltorque.structed.R
+import com.digitaltorque.structed.utils.MsgPackType
 import com.digitaltorque.structed.utils.setValue
+import com.digitaltorque.structed.utils.typeHintText
+import com.digitaltorque.structed.utils.value
 import com.digitaltorque.structed.utils.valueOrType
 import com.digitaltorque.structed.viewmodel.BrowserViewModel
 import com.example.compose.MessagePackReaderTheme
@@ -78,15 +81,19 @@ fun MsgPackRow(parentPath: Array<String>, item: Field) {
                 Firebase.analytics.logEvent("cancelEdit") {
                     param("path", parentPath.plus(item.key).joinToString("/"))
                 }
-            }, onConfirmation = {
+            }, onConfirmation = { key: String, value: String, type: MsgPackType ->
                 Firebase.analytics.logEvent("saveValue") {
                     param("path", parentPath.plus(item.key).joinToString("/"))
-                    param("value", it)
+                    param("value", value)
                 }
-                item.setValue(it)
+                item.setValue(value)
                 viewModel.setField(parentPath.joinToString("/"), item)
                 openEditorDialog.value = false
-            }, item = item)
+            }, options = EditorOptions.builder {
+                key = item.key
+                value = item.value()
+                type = MsgPackType.values().elementAtOrElse(item.type().toInt()) { MsgPackType.Int64 }
+            })
         }
     }
 }

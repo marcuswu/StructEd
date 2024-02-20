@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                             browserViewModel.file?.let {
                                 val pathArray = backStackEntry.arguments?.getStringArray("path") ?: arrayOf()
                                 Surface (modifier = Modifier.fillMaxSize()){
-                                    MsgPackBrowser(path = pathArray,
+                                    MsgPackBrowser(vm = null, path = pathArray,
                                         purchaseManager = purchaseManager)
                                 }
                             }

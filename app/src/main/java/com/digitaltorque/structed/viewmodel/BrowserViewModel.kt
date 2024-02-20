@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import app.App
+import com.digitaltorque.structed.config.AppConfig
 import com.digitaltorque.structed.utils.FileUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,6 +37,12 @@ class BrowserViewModel(
                 val data = FileUtil.readFile(getApplication<Application>().applicationContext, it)
                 goViewModel = ViewerViewModel(data)
             }
+        }
+
+    val waitDuration: Long
+        get() {
+//            return App.config().getInt(AppConfig.ASK_SUPPORT_WAIT)
+            return 0
         }
 
     private val _state = MutableStateFlow(goViewModel?.cloneState())
