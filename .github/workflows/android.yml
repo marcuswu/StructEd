@@ -19,7 +19,7 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
       with:
-        packages: 'tools platform-tools build-tools'
+        packages: 'tools platform-tools build-tools;latest'
     - name: Make Gradle executable
       run: chmod +x ./gradlew
     - name: Build Release APK
