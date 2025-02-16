@@ -19,7 +19,7 @@ jobs:
     - name: Setup build tool version variable
       shell: bash
       run: |
-        BUILD_TOOL_VERSION=$(ls /usr/local/lib/android/sdk/build-tools/ | tail -n 1)
+        BUILD_TOOLS_VERSION=$(ls /usr/local/lib/android/sdk/build-tools/ | tail -n 1)
         echo "BUILD_TOOLS_VERSION=$BUILD_TOOLS_VERSION" >> $GITHUB_ENV
         echo Last build tool version is: $BUILD_TOOLS_VERSION
     - name: Setup Android SDK
@@ -37,7 +37,7 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
       env:
-        BUILD_TOOLS_VERSION: "34.0.0"
+        BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
     - uses: actions/upload-artifact@v4
       with:
         name: StructEd Sideload APK
