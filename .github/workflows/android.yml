@@ -16,10 +16,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
     - name: Make Gradle executable
       run: chmod +x ./gradlew
     - name: Build Release APK
-      run: ./gradlew assembleRelease
+      run: ./gradlew --no-daemon assembleRelease
     - name: Sign build
       uses: r0adkll/sign-android-release@v1
       id: sign_app
