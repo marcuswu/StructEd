@@ -16,10 +16,14 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
+    - name: Setup build tool version variable
+      shell: bash
+      run: |
+        BUILD_TOOL_VERSION=$(ls /usr/local/lib/android/sdk/build-tools/ | tail -n 1)
+        echo "BUILD_TOOLS_VERSION=$BUILD_TOOLS_VERSION" >> $GITHUB_ENV
+        echo Last build tool version is: $BUILD_TOOLS_VERSION
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
-      with:
-        packages: 'tools platform-tools build-tools;latest'
     - name: Make Gradle executable
       run: chmod +x ./gradlew
     - name: Build Release APK
