@@ -41,10 +41,9 @@ jobs:
       with:
         name: StructEd Sideload APK
         path: ${{ steps.sign_app.outputs.signedReleaseFile }}
-    - uses: "marvinpinto/action-automatic-releases@latest"
+    - name: upload release
+      uses: ncipollo/release-action@v1
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
-        files: |
-          LICENSE
+        artifacts: |
           ${{ steps.sign_app.outputs.signedReleaseFile }}
+          LICENSE
